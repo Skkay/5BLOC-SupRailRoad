@@ -1,6 +1,12 @@
+import Navbar from './components/Navbar/Navbar';
+
 const App = () => {
     return (
-        <h1 className="text-3xl font-bold">SupRailRoad</h1>
+        <div>
+            <header>
+                <Navbar />
+            </header>
+        </div>
     );
 };
 
