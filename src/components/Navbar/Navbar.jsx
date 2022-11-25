@@ -4,21 +4,21 @@ import { setAddress } from '../../slices/addressSlice';
 import vite from '../../assets/vite.svg';
 
 const Navbar = () => {
-    const [isConnected, setConnedted] = useState(false);
+    const [isConnected, setConnected] = useState(false);
 
     const address = useSelector((state) => state.address.value);
     const dispatch = useDispatch();
 
     const handleMetamaskConnect = () => {
         ethereum.request({ method: 'eth_requestAccounts' })
-            .then((res) => setConnedted(true))
+            .then((res) => setConnected(true))
         ;
     }
 
     useEffect(() => {
         if (ethereum.selectedAddress !== null) {
             dispatch(setAddress(ethereum.selectedAddress));
-            setConnedted(true);
+            setConnected(true);
         }
     }, [isConnected]);
 
