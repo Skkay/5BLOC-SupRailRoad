@@ -1,22 +1,23 @@
 import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setAddress } from '../../slices/addressSlice';
 import vite from '../../assets/vite.svg';
 
 const Navbar = () => {
     const [isConnected, setConnedted] = useState(false);
-    const [metamaskAddress, setMetamaskAddress] = useState(null);
+
+    const address = useSelector((state) => state.address.value);
+    const dispatch = useDispatch();
 
     const handleMetamaskConnect = () => {
         ethereum.request({ method: 'eth_requestAccounts' })
-            .then((res) => {
-                console.log(res);
-                setConnedted(true);
-            })
+            .then((res) => setConnedted(true))
         ;
     }
 
     useEffect(() => {
         if (ethereum.selectedAddress !== null) {
-            setMetamaskAddress(ethereum.selectedAddress);
+            dispatch(setAddress(ethereum.selectedAddress));
             setConnedted(true);
         }
     }, [isConnected]);
@@ -32,7 +33,7 @@ const Navbar = () => {
                     <ul className="flex flex-row p-2">
                         <li>
                             {isConnected ?
-                                <span className="py-2 px-3">{metamaskAddress}</span>
+                                <span className="py-2 px-3">{address}</span>
                             :
                                 <a href="#" onClick={handleMetamaskConnect} className="py-2 px-3 rounded bg-transparent hover:bg-gray-100">Connect to MetaMask</a>
                             }
