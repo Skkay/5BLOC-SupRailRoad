@@ -1,4 +1,5 @@
 import busTicketImg from '../../assets/bus-ticket_placeholder.png';
+import BuyTicket from '../Button/BuyTicket';
 
 const Ticket = ({ title, price, currency = 'GoerliETH' }) => {
     return (
@@ -10,7 +11,7 @@ const Ticket = ({ title, price, currency = 'GoerliETH' }) => {
                 <h1 className="text-xl font-semibold">{title}</h1>
                 <div className="text-4xl mt-3">{price} {currency}</div>
                 <div className="mt-12 w-fit mx-auto">
-                    <button className="bg-purple-800 text-white rounded-md px-4 py-3">Buy Ticket</button>
+                    <BuyTicket className={'bg-purple-800 disabled:bg-purple-400 text-white rounded-md px-4 py-3'} price={price} />
                 </div>
             </div>
         </div>
