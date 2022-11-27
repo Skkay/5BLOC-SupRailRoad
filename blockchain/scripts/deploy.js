@@ -1,11 +1,12 @@
-import hre from 'hardhat@esm';
+const hre = require('hardhat');
+
 
 const main = async () => {
     const name = 'SupRailRoad - Bus Ticket';
     const symbol = 'SRRBT';
     const ipfsMetadataUri = 'ipfs://QmeKvYa8F2srzp2WNVPwNCeDYvXs6bxR4hSiqR4T4pzuRt';
 
-    const srrContractFactory = await hre.ethers.getContractFactory('GreedyGeese');
+    const srrContractFactory = await hre.ethers.getContractFactory('BusTicket');
     const srrContract = await srrContractFactory.deploy(name, symbol, ipfsMetadataUri);
 
     await srrContract.deployed();
