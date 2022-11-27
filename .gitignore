@@ -26,3 +26,5 @@ dist-ssr
 # Hardhat files
 cache
 artifacts
+
+blockchain/.env

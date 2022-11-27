@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('@nomiclabs/hardhat-ethers');
 
 const { ALCHEMY_KEY, ACCOUNT_PRIVATE_KEY } = process.env;
 
@@ -6,7 +7,7 @@ const { ALCHEMY_KEY, ACCOUNT_PRIVATE_KEY } = process.env;
 module.exports = {
     solidity: "0.8.17",
     paths: {
-        artifacts: './src/artifacts',
+        artifacts: '../app/src/artifacts',
     },
     networks: {
         goerli: {
