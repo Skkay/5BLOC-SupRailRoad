@@ -6,7 +6,7 @@ const main = async () => {
     const symbol = 'SRRBT';
     const ipfsMetadataUri = 'ipfs://QmeKvYa8F2srzp2WNVPwNCeDYvXs6bxR4hSiqR4T4pzuRt';
 
-    const srrContractFactory = await hre.ethers.getContractFactory('BusTicket');
+    const srrContractFactory = await hre.ethers.getContractFactory('Ticket');
     const srrContract = await srrContractFactory.deploy(name, symbol, ipfsMetadataUri);
 
     await srrContract.deployed();
