@@ -10,12 +10,15 @@ contract BusTicket is ERC721Enumerable, Ownable {
     Counters.Counter private currentTokenId;
 
     string public baseTokenURI;
+    uint256 public cost = 0.1 ether;
 
     constructor(string memory _name, string memory _symbol, string memory _tokenURI) ERC721(_name, _symbol) {
         baseTokenURI = _tokenURI;
     }
 
     function mint(address _to) public payable {
+        require(msg.value >= cost);
+
         currentTokenId.increment();
         uint256 newItemId = currentTokenId.current();
 
