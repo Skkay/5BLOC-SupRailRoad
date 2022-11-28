@@ -1,6 +1,5 @@
 const hre = require('hardhat');
 
-
 const main = async () => {
     const name = 'SupRailRoad - Metro Ticket';
     const symbol = 'SRRMT';
