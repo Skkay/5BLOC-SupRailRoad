@@ -11,6 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
+blockchain/.env
 
 # Editor directories and files
 .vscode/*
@@ -25,6 +26,5 @@ dist-ssr
 
 # Hardhat files
 cache
-artifacts
-
-blockchain/.env
+app/src/artifacts/*
+!app/src/artifacts/contracts/
