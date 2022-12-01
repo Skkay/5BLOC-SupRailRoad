@@ -1,5 +1,5 @@
 import Navbar from './components/Navbar/Navbar';
-import Ticket from './components/Card/Ticket';
+import TicketContainer from './components/TicketContainer/TicketContainer';
 
 const App = () => {
     return (
@@ -8,7 +8,7 @@ const App = () => {
                 <Navbar />
             </header>
             <main className='p-4'>
-                <Ticket title={'Bus Ticket'} price={0.1} />
+                <TicketContainer />
             </main>
         </div>
     );
