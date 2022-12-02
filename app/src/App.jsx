@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
-import TicketContainer from './components/TicketContainer/TicketContainer';
+import MainPage from './pages/MainPage/MainPage.jsx';
 
 const App = () => {
     return (
@@ -10,7 +10,7 @@ const App = () => {
             </header>
             <main className='p-4'>
                 <Routes>
-                    <Route path="/" element={<TicketContainer />} />
+                    <Route path="/" element={<MainPage />} />
                 </Routes>
             </main>
         </div>
