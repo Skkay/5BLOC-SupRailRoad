@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
-import MainPage from './pages/MainPage/MainPage.jsx';
+import AdminPage from './pages/AdminPage/AdminPage';
+import MainPage from './pages/MainPage/MainPage';
 
 const App = () => {
     return (
@@ -8,9 +9,10 @@ const App = () => {
             <header>
                 <Navbar />
             </header>
-            <main className='p-4'>
+            <main className="p-4">
                 <Routes>
                     <Route path="/" element={<MainPage />} />
+                    <Route path="/admin" element={<AdminPage />} />
                 </Routes>
             </main>
         </div>
