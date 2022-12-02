@@ -1,3 +1,4 @@
+import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import TicketContainer from './components/TicketContainer/TicketContainer';
 
@@ -8,7 +9,9 @@ const App = () => {
                 <Navbar />
             </header>
             <main className='p-4'>
-                <TicketContainer />
+                <Routes>
+                    <Route path="/" element={<TicketContainer />} />
+                </Routes>
             </main>
         </div>
     );
