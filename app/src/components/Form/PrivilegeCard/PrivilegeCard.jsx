@@ -1,6 +1,8 @@
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
 import { ethers } from 'ethers';
 import { parseUnits } from 'ethers/lib/utils';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../../../firebase';
 
 import privilegeCardContractMetadata from '../../../artifacts/contracts/PrivilegeCard.sol/PrivilegeCard.json';
 
@@ -18,7 +20,17 @@ const PrivilegeCard = () => {
 
         await contract.deployed();
 
-        console.log(`Contract deployed to: ${contract.address}`); // TODO
+        console.log(`Contract deployed to: ${contract.address}`);
+
+        const contractData = {
+            ...data,
+            contractAddress: contract.address,
+        };
+
+        addDoc(collection(db, 'privilegeCards'), contractData)
+            .then((res) => console.log(res))
+            .catch((err) => console.error(err))
+        ;
     }
 
     return (
@@ -73,7 +85,7 @@ const PrivilegeCard = () => {
                         disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
                     "/>
                 </label>
-                <button className='bg-purple-800 disabled:bg-purple-400 text-white rounded-md px-4 py-2 self-end'>Create</button>
+                <button className="bg-purple-800 disabled:bg-purple-400 text-white rounded-md px-4 py-2 self-end">Create</button>
             </div>
         </form>
     )
