@@ -36,7 +36,10 @@ contract PrivilegeCard is ERC721Enumerable, Ownable {
     }
 
     function mint(address _to) public payable {
-        require(msg.value >= cost);
+        if (msg.sender != owner()) {
+            require(msg.value >= cost);
+        }
+
         require(totalSupply() <= quantity);
 
         currentTokenId.increment();
