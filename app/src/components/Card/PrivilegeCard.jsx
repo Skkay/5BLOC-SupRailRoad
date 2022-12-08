@@ -20,7 +20,7 @@ const PrivilegeCard = ({ contractAddress, currency = 'ETH' }) => {
 
         contract.cost()
             .then((cost) => setCost(String(cost)))
-            .catch((err) => console.err(err))
+            .catch((err) => console.error(err))
         ;
     }
 
@@ -32,7 +32,7 @@ const PrivilegeCard = ({ contractAddress, currency = 'ETH' }) => {
 
         alchemy.nft.getNftMetadata(contractAddress, 1)
             .then((res) => setMetadata(res))
-            .catch((err) => console.err(err))
+            .catch((err) => console.error(err))
         ;
     }
 
