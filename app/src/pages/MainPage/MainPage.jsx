@@ -1,4 +1,4 @@
-import TicketContainer from '../../components/TicketContainer/TicketContainer';
+import TicketContainer from '../../components/CardContainer/TicketContainer';
 
 const MainPage = () => {
     return (
