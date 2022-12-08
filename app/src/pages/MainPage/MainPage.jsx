@@ -1,8 +1,15 @@
+import PrivilegeCardContainer from '../../components/CardContainer/PrivilegeCardContainer';
 import TicketContainer from '../../components/CardContainer/TicketContainer';
 
 const MainPage = () => {
     return (
-        <TicketContainer />
+        <>
+            <TicketContainer />
+            <div className="mt-4">
+                <PrivilegeCardContainer />
+            </div>
+
+        </>
     );
 };
 
