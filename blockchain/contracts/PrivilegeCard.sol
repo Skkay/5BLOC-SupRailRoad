@@ -21,6 +21,8 @@ contract PrivilegeCard is ERC721Enumerable, Ownable {
         cost = _cost;
         quantity = _quantity;
         discount = _discount;
+
+        mint(msg.sender);
     }
 
     function _baseURI() internal view override returns (string memory) {
