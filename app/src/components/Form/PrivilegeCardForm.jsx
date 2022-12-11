@@ -2,9 +2,9 @@ import { useForm } from 'react-hook-form';
 import { ethers } from 'ethers';
 import { parseUnits } from 'ethers/lib/utils';
 import { collection, addDoc } from 'firebase/firestore';
-import { db } from '../../../firebase';
+import { db } from '../../firebase';
 
-import privilegeCardContractMetadata from '../../../artifacts/contracts/PrivilegeCard.sol/PrivilegeCard.json';
+import privilegeCardContractMetadata from '../../artifacts/contracts/PrivilegeCard.sol/PrivilegeCard.json';
 
 const ACCOUNT_PRIVATE_KEY = import.meta.env.VITE_ACCOUNT_PRIVATE_KEY;
 
