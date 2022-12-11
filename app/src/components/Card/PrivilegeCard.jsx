@@ -91,7 +91,7 @@ const PrivilegeCard = ({ contractAddress, currency = 'ETH' }) => {
                 <div className="text-4xl mt-3">{cost ? formatUnits(BigNumber.from(cost), 'ether') : '-'} {currency}</div>
 
                 <div className="mt-8 w-fit mx-auto">
-                    <button className='bg-purple-800 disabled:bg-purple-400 text-white rounded-md px-4 py-3' onClick={handleBuyButtonClick} disabled={clientAddress === ''}>Buy Card</button>
+                    <button className='bg-purple-800 disabled:bg-purple-400 text-white rounded-md px-4 py-3' onClick={handleBuyButtonClick} disabled={clientAddress === '' || left === 0}>Buy Card</button>
                 </div>
 
                 <div className="absolute bottom-2 right-4">
