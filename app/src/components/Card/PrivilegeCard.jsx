@@ -13,14 +13,25 @@ const PrivilegeCard = ({ contractAddress, currency = 'ETH' }) => {
 
     const [cost, setCost] = useState(null);
     const [metadata, setMetadata] = useState(null);
+    const [left, setLeft] = useState();
 
-    const fetchCost = () => {
+    const fetchData = () => {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const contract = new ethers.Contract(contractAddress, privilegeCardMetadata.abi, provider);
 
         contract.cost()
             .then((cost) => setCost(String(cost)))
             .catch((err) => console.error(err))
+        ;
+
+        Promise.all([contract.quantity(), contract.totalSupply()])
+            .then((values) => {
+                const quantity = formatUnits(BigNumber.from(values[0]), 0);
+                const totalSupply = formatUnits(BigNumber.from(values[1]), 0);
+
+                setLeft(quantity - totalSupply);
+            })
+            .catch((err) => console.error(err));
         ;
     }
 
@@ -53,12 +64,24 @@ const PrivilegeCard = ({ contractAddress, currency = 'ETH' }) => {
     };
 
     useEffect(() => {
-        fetchCost();
+        fetchData();
         fetchMetadata();
     }, []);
 
+    const CardLeft = ({ remainingQuantity }) => {
+        if (remainingQuantity > 7) {
+            return <div className="bg-green-800 text-white px-2 rounded-lg">{remainingQuantity ?? '-'} left</div>;
+        }
+
+        if (remainingQuantity > 3) {
+            return <div className="bg-orange-700 text-white px-2 rounded-lg">{remainingQuantity ?? '-'} left</div>;
+        }
+
+        return <div className="bg-red-800 text-white px-2 rounded-lg">{remainingQuantity ?? '-'} left</div>;
+    }
+
     return (
-        <div className="flex bg-white border rounded-lg shadow-xl p-4">
+        <div className="relative flex bg-white border rounded-lg shadow-xl p-4">
             <div className="border border-gray-200 w-fit p-4">
                 <img src={metadata ? `https://ipfs.io/ipfs/${metadata.rawMetadata.image.substring(7)}` : ''} alt={`${metadata ? metadata.title : ''} image`} width="220" height="220" />
             </div>
@@ -69,6 +92,10 @@ const PrivilegeCard = ({ contractAddress, currency = 'ETH' }) => {
 
                 <div className="mt-8 w-fit mx-auto">
                     <button className='bg-purple-800 disabled:bg-purple-400 text-white rounded-md px-4 py-3' onClick={handleBuyButtonClick} disabled={clientAddress === ''}>Buy Card</button>
+                </div>
+
+                <div className="absolute bottom-2 right-4">
+                    <CardLeft remainingQuantity={left} />
                 </div>
             </div>
         </div>
