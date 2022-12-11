@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import PrivilegeCardForm from '../../components/Form/PrivilegeCardForm';
 
 const ADMIN_ADDRESS = import.meta.env.VITE_ADMIN_ADDRESS;
 
@@ -12,7 +13,9 @@ const AdminPage = () => {
     }
 
     return (
-        <div>admin</div>
+        <div>
+            <PrivilegeCardForm />
+        </div>
     );
 };
 
