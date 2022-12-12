@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { BigNumber, ethers } from 'ethers';
 import { formatUnits } from 'ethers/lib/utils';
-import { Network, Alchemy } from "alchemy-sdk";
+import { Network, Alchemy } from 'alchemy-sdk';
+import { toast } from 'react-toastify';
 
 import ticketContractMetadata from '../../artifacts/contracts/Ticket.sol/Ticket.json';
 
@@ -20,7 +21,10 @@ const Ticket = ({ contractAddress, currency = 'ETH' }) => {
 
         contract.cost()
             .then((cost) => setCost(String(cost)))
-            .catch((err) => console.error(err))
+            .catch((err) => {
+                console.error(err);
+                toast.error('An unexpected error occurred.');
+            })
         ;
     }
 
@@ -32,7 +36,10 @@ const Ticket = ({ contractAddress, currency = 'ETH' }) => {
 
         alchemy.nft.getNftMetadata(contractAddress, 1)
             .then((res) => setMetadata(res))
-            .catch((err) => console.error(err))
+            .catch((err) => {
+                console.error(err);
+                toast.error('An unexpected error occurred.');
+            })
         ;
     }
 
@@ -46,8 +53,11 @@ const Ticket = ({ contractAddress, currency = 'ETH' }) => {
             value: cost,
         }
 
-        contract.mint(clientAddress, overrides)
-            .then((res) => console.log(res))
+        toast.promise(contract.mint(clientAddress, overrides), {
+            pending: 'The transaction is in process...',
+            success: `You successfully buy one ${metadata.title} (${metadata.contract.symbol})!`,
+            error: 'An error occurred during the transaction process.',
+        })
             .catch((err) => console.error(err))
         ;
     };

@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { Alchemy, Network } from 'alchemy-sdk';
 import { db } from '../../firebase';
-import OwnedPrivilegeCard from '../Card/OwnedPrivilegeCard';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+
+import OwnedPrivilegeCard from '../Card/OwnedPrivilegeCard';
 
 const ALCHEMY_API_KEY = import.meta.env.VITE_ALCHEMY_API_KEY;
 
@@ -20,7 +22,10 @@ const OwnedPrivilegeCardContainer = () => {
 
                 return docs;
             })
-            .catch((err) => console.error(err))
+            .catch((err) => {
+                console.error(err);
+                toast.error('An unexpected error occurred.');
+            })
         ;
     };
 
@@ -40,7 +45,10 @@ const OwnedPrivilegeCardContainer = () => {
             contractAddresses: contracts.map((contract) => contract.contractAddress),
         })
             .then((res) => setNfts(res))
-            .catch((err) => console.error(err))
+            .catch((err) => {
+                console.error(err);
+                toast.error('An unexpected error occurred.');
+            })
         ;
     };
 

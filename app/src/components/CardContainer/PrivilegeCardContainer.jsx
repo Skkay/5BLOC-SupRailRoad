@@ -13,7 +13,10 @@ const PrivilegeCardContainer = () => {
                 querySnaphot.docs.map((doc) => docs.push({id: doc.id, ...doc.data()}));
                 setContracts(docs);
             })
-            .catch((err) => console.error(err))
+            .catch((err) => {
+                console.error(err);
+                toast.error('An unexpected error occurred.');
+            })
         ;
     };
 

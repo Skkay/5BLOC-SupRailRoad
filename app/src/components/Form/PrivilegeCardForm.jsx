@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { ethers } from 'ethers';
 import { parseUnits } from 'ethers/lib/utils';
 import { collection, addDoc } from 'firebase/firestore';
+import { toast } from 'react-toastify';
 import { db } from '../../firebase';
 
 import privilegeCardContractMetadata from '../../artifacts/contracts/PrivilegeCard.sol/PrivilegeCard.json';
@@ -18,7 +19,11 @@ const PrivilegeCard = () => {
         const contractFactory = new ethers.ContractFactory(privilegeCardContractMetadata.abi, privilegeCardContractMetadata.bytecode, wallet);
         const contract = await contractFactory.deploy(data.name, data.symbol, data.metadataUri, parseUnits(data.price, 'ether'), data.quantity, data.discount);
 
-        await contract.deployed();
+        await toast.promise(contract.deployed(), {
+            pending: 'The contract is being deployed...',
+            success: 'The contract is deployed!',
+            error: 'The contract was unable to be deployed.',
+        });
 
         console.log(`Contract deployed to: ${contract.address}`);
 
@@ -27,8 +32,11 @@ const PrivilegeCard = () => {
             contractAddress: contract.address,
         };
 
-        addDoc(collection(db, 'privilegeCards'), contractData)
-            .then((res) => console.log(res))
+        toast.promise(addDoc(collection(db, 'privilegeCards'), contractData), {
+            pending: 'The contract address is being stored in the database...',
+            success: 'The contract address is stored to the database!',
+            error: 'The contract address was unable to be stored.',
+        })
             .catch((err) => console.error(err))
         ;
     }
