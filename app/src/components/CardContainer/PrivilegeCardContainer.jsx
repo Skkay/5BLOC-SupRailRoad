@@ -12,7 +12,6 @@ const PrivilegeCardContainer = () => {
                 const docs = [];
                 querySnaphot.docs.map((doc) => docs.push({id: doc.id, ...doc.data()}));
                 setContracts(docs);
-
             })
             .catch((err) => console.error(err))
         ;

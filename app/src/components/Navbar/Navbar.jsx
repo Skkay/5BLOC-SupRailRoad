@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAddress } from '../../slices/addressSlice';
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 import vite from '../../assets/vite.svg';
 
 const Navbar = () => {
@@ -32,8 +34,11 @@ const Navbar = () => {
                 <div className="w-auto">
                     <ul className="flex flex-row p-2">
                         <li>
-                            {isConnected ?
-                                <span className="py-2 px-3">{address}</span>
+                            {isConnected && address ?
+                                <>
+                                    <span id="tooltip-anchor" className="bg-sky-700 text-white px-2 py-1 rounded">Connected</span>
+                                    <Tooltip anchorId="tooltip-anchor" content={address} place="left" />
+                                </>
                             :
                                 <a href="#" onClick={handleMetamaskConnect} className="py-2 px-3 rounded bg-transparent hover:bg-gray-100">Connect to MetaMask</a>
                             }
