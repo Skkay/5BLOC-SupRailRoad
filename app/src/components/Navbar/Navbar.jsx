@@ -24,6 +24,27 @@ const Navbar = () => {
         }
     }, [isConnected]);
 
+    const NavbarLinks = () => {
+        if (isConnected && address) {
+            return (
+                <>
+                    <li>
+                        <span id="tooltip-anchor" className="bg-sky-700 text-white px-2 py-1 rounded">Connected</span>
+                        <Tooltip anchorId="tooltip-anchor" content={address} place="left" />
+                    </li>
+                </>
+            );
+        }
+
+        return (
+            <>
+                <li>
+                    <a href="#" onClick={handleMetamaskConnect} className="py-2 px-3 rounded bg-transparent hover:bg-gray-100">Connect to MetaMask</a>
+                </li>
+            </>
+        );
+    }
+
     return (
         <nav className="bg-white border-b border-gray-200 p-2">
             <div className="flex flex-wrap items-center justify-between">
@@ -33,17 +54,7 @@ const Navbar = () => {
                 </a>
                 <div className="w-auto">
                     <ul className="flex flex-row p-2">
-                        <li>
-                            {isConnected && address ?
-                                <>
-                                    <span id="tooltip-anchor" className="bg-sky-700 text-white px-2 py-1 rounded">Connected</span>
-                                    <Tooltip anchorId="tooltip-anchor" content={address} place="left" />
-                                </>
-                            :
-                                <a href="#" onClick={handleMetamaskConnect} className="py-2 px-3 rounded bg-transparent hover:bg-gray-100">Connect to MetaMask</a>
-                            }
-
-                        </li>
+                        <NavbarLinks />
                     </ul>
                 </div>
             </div>
