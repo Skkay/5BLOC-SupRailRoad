@@ -2,8 +2,12 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAddress } from '../../slices/addressSlice';
 import { Tooltip } from 'react-tooltip';
+import { Link } from 'react-router-dom';
+
 import 'react-tooltip/dist/react-tooltip.css';
 import vite from '../../assets/vite.svg';
+
+const ADMIN_ADDRESS = import.meta.env.VITE_ADMIN_ADDRESS;
 
 const Navbar = () => {
     const [isConnected, setConnected] = useState(false);
@@ -29,7 +33,15 @@ const Navbar = () => {
             return (
                 <>
                     <li>
-                        <span id="tooltip-anchor" className="bg-sky-700 text-white px-2 py-1 rounded">Connected</span>
+                        <Link to="/me" className="py-2 px-3 ml-2 rounded bg-transparent hover:bg-gray-100">My profile</Link>
+                    </li>
+                    {address === ADMIN_ADDRESS && (
+                        <li>
+                            <Link to="/admin" className="py-2 px-3 ml-2 rounded bg-transparent hover:bg-gray-100">Admin</Link>
+                        </li>
+                    )}
+                    <li>
+                        <span id="tooltip-anchor" className="bg-sky-700 text-white px-2 py-1 rounded ml-2">Connected</span>
                         <Tooltip anchorId="tooltip-anchor" content={address} place="left" />
                     </li>
                 </>
