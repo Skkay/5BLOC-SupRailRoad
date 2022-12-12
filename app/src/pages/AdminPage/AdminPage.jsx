@@ -14,7 +14,10 @@ const AdminPage = () => {
 
     return (
         <div>
-            <PrivilegeCardForm />
+            <div className="border rounded-lg shadow-md p-4">
+                <h1 className="text-2xl mb-5">Create a new Privilege Card</h1>
+                <PrivilegeCardForm />
+            </div>
         </div>
     );
 };
