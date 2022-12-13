@@ -60,10 +60,10 @@ const Navbar = () => {
     return (
         <nav className="bg-white border-b border-gray-200 p-2">
             <div className="flex flex-wrap items-center justify-between">
-                <a href="#" className="flex items-center">
+                <Link to="/" className="flex items-center">
                     <img src={vite} className="h-9 mr-3" alt="SupRailRoad Logo" />
                     <span className="self-center text-xl font-semibold whitespace-nowrap">SupRailRoad</span>
-                </a>
+                </Link>
                 <div className="w-auto">
                     <ul className="flex flex-row p-2">
                         <NavbarLinks />
