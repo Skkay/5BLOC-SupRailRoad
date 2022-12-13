@@ -1,7 +1,7 @@
 require('dotenv').config();
 require('@nomiclabs/hardhat-ethers');
 
-const { ALCHEMY_KEY, ACCOUNT_PRIVATE_KEY } = process.env;
+const { ALCHEMY_API_KEY, METAMASK_API_KEY } = process.env;
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
@@ -11,8 +11,8 @@ module.exports = {
     },
     networks: {
         goerli: {
-            url: `https://eth-goerli.alchemyapi.io/v2/${ALCHEMY_KEY}`,
-            accounts: [`0x${ACCOUNT_PRIVATE_KEY}`]
+            url: `https://eth-goerli.alchemyapi.io/v2/${ALCHEMY_API_KEY}`,
+            accounts: [`0x${METAMASK_API_KEY}`]
         },
     },
 };

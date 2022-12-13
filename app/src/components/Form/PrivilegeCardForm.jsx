@@ -7,14 +7,14 @@ import { db } from '../../firebase';
 
 import privilegeCardContractMetadata from '../../artifacts/contracts/PrivilegeCard.sol/PrivilegeCard.json';
 
-const ACCOUNT_PRIVATE_KEY = import.meta.env.VITE_ACCOUNT_PRIVATE_KEY;
+const METAMASK_API_KEY = import.meta.env.VITE_METAMASK_API_KEY;
 
 const PrivilegeCard = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
         const provider = new ethers.providers.Web3Provider(ethereum);
-        const wallet = new ethers.Wallet(ACCOUNT_PRIVATE_KEY, provider);
+        const wallet = new ethers.Wallet(METAMASK_API_KEY, provider);
 
         const contractFactory = new ethers.ContractFactory(privilegeCardContractMetadata.abi, privilegeCardContractMetadata.bytecode, wallet);
         const contract = await contractFactory.deploy(data.name, data.symbol, data.metadataUri, parseUnits(data.price, 'ether'), data.quantity, data.discount);

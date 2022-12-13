@@ -9,8 +9,8 @@
 
 1. Create `.env` file from the `.env.dist` with:
 ```ini
-ALCHEMY_KEY = ""
-ACCOUNT_PRIVATE_KEY = "" # MetaMask API key
+METAMASK_API_KEY = ""   # Your MetaMask private API key
+ALCHEMY_API_KEY = ""    # Your Alchemy private API key
 ```
 
 2. Install packages
