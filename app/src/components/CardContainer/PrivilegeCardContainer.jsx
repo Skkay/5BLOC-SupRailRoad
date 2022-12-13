@@ -1,5 +1,6 @@
 import { collection, getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { db } from '../../firebase';
 import PrivilegeCard from '../Card/PrivilegeCard';
 
